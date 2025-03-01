@@ -1,0 +1,1 @@
+IN this folder are the scripts for infering the correlation network and the functional groups with fastspar and functionink respectively (i should modify the function so it uses the thresholds). The fastspar_output file is code from diego, and is already included in the full function.
