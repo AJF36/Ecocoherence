@@ -12,7 +12,7 @@ mse_lin_forward <- numeric()
 mse_exp_forward <- numeric()
 mse_lin_backwards <- numeric()
 mse_exp_backwards <- numeric()
-substrates <- c("Agarose")
+substrates <- c("Agarose","AgaroseAlginate","Alginate","Chitin","AgaroseChitosan","AgaroseCarrageenan","Carrageenan")
 g = 1
 minimun_values <- numeric()
 
@@ -129,7 +129,7 @@ for (substrate in substrates){
   file_path_figures <- normalizePath(file_path_figures)
   setwd(file_path_figures)
   system(paste("mkdir ",substrate))
-  ggsave("double_linear_model.png",plot,height = 5 ,width =10 )
+  ggsave(paste(substrate,"double_linear_model.png",sep ="_"),plot,height = 5 ,width =10 )
 }
 minimun_values
 minimun_values<- minimun_values[-1]

@@ -13,7 +13,8 @@ library(fs)
 
 # install.packages("fs")
 
-substrates <- c("Agarose")
+substrates <- c("Alginate","AgaroseAlginate","AgaroseCarrageenan","AgaroseChitosan","Chitin")
+
 
 run_pipeline = function(fileNet,pathNet,pathRepo, # mandatory
                         weighted=FALSE,directed=FALSE,
@@ -82,13 +83,17 @@ path_to_input <- file.path(work_dir,"..","filter_network_by_threshold")
 path_to_input <- normalizePath(path_to_input)
 setwd(work_dir)
 for (substrate in substrates){
-  system(paste("mkdir ",substrate))
+  substrate_dir <- file.path(work_dir,substrate)
+  if (!dir.exists(substrate_dir)) {
+    dir.create(substrate_dir)
+  }
+  # system(paste("mkdir ",substrate,sep = ""))
   #Por ultimo functionink
   fileNet <- paste("interactions_filtered_p0.01","threshold",substrate,".tsv", sep = "_")
   # pathNet <- paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/",substrate, sep ="")
   pathNet <- path_to_input
   pathRepo <- file.path(home_dir,"functionInk")
-  run_pipeline(fileNet = fileNet, pathRepo = pathRepo, pathNet = pathNet, weighted = TRUE, types = TRUE, mode = "internal")
+  run_pipeline(fileNet = fileNet, pathRepo = pathRepo, pathNet = pathNet, weighted = TRUE, types = TRUE,mode = "internal")
   
   ###moving the directories
   destiny <- file.path(work_dir,substrate)
@@ -99,6 +104,3 @@ for (substrate in substrates){
 
 
 
-for(substrate in substrates){
- 
-}

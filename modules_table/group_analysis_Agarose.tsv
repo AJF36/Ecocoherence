@@ -1,25 +1,29 @@
-1	2	4	16	21	22	27	32	35	36	40	46	59	75	88	93	105	119	125	126	134	174	175	181	194	208	209	339	n_members	Family
-7	5	1	1	2	2	11	0	0	0	3	0	1	1	0	1	3	2	0	0	1	1	0	0	0	0	0	1	43	Rhodobacteraceae
-0	3	0	1	7	0	10	0	3	0	0	0	1	0	1	1	0	0	0	1	1	1	2	0	0	0	1	0	33	Colwelliaceae
-0	3	0	2	1	0	10	0	0	0	0	0	2	0	3	3	0	0	0	0	0	4	1	0	0	1	0	0	30	Oceanospirillaceae
-0	13	0	1	2	0	3	0	0	0	0	0	1	0	0	2	0	0	0	2	0	0	1	0	0	0	0	0	25	Alteromonadales
-0	8	1	2	0	0	3	0	0	0	0	4	0	0	0	0	0	0	0	4	0	0	0	1	1	0	1	0	25	Candidatus Carsonella
-0	9	3	0	2	0	0	6	0	0	0	0	1	1	0	0	0	0	2	0	0	0	0	0	1	0	0	0	25	Saprospiraceae
-0	0	0	0	18	0	0	0	0	0	0	0	1	0	1	3	0	0	0	0	0	0	0	0	0	0	0	0	23	Campylobacteraceae
-0	9	0	0	8	0	0	0	1	0	0	0	0	0	0	2	0	0	0	0	1	0	0	0	0	0	0	0	21	Flavobacteriaceae
-0	11	1	0	0	0	5	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	20	Alteromonadaceae
-0	10	0	0	1	1	0	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	15	Flammeovirgaceae
-0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	14	Desulfobulbaceae
-0	0	0	0	9	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	11	Cryomorphaceae
-0	7	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	9	Nannocystaceae
-0	2	0	0	0	0	0	6	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	9	Porphyromonadaceae
-0	3	0	0	2	0	0	0	0	1	0	0	0	2	0	1	0	0	0	0	0	0	0	0	0	0	0	0	9	Hyphomonadaceae
-1	4	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	Planctomycetaceae
-0	2	0	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	Desulfobacteraceae
-0	0	0	0	1	0	0	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	Psychromonadaceae
-0	3	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Puniceicoccaceae
-0	1	0	0	0	0	0	1	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Verrucomicrobiaceae
-0	0	0	1	0	0	2	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Clostridiales
-0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	4	Ferrimonadaceae
-0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	4	Pseudoalteromonadaceae
-0	0	0	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Helicobacteraceae
+1	4	10	11	27	29	32	48	50	59	60	64	89	90	92	95	109	120	141	147	154	165	170	173	188	193	200	201	208	213	316	336	n_members	Family
+7	1	0	1	9	0	0	1	0	0	0	0	0	1	2	0	10	0	1	3	0	1	2	5	0	1	0	2	0	3	0	1	51	Rhodobacteraceae
+2	2	1	0	0	0	0	5	0	1	0	0	0	1	1	0	11	0	1	0	4	0	0	0	0	2	1	0	0	0	0	0	32	Colwelliaceae
+18	2	1	0	0	0	0	2	0	2	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	28	Alteromonadales
+10	0	0	8	0	2	0	1	0	0	1	0	0	0	0	1	0	1	0	0	0	1	0	0	0	0	0	0	1	0	1	0	27	Saprospiraceae
+4	3	1	0	0	0	0	1	0	0	0	0	1	3	1	0	9	0	0	0	0	0	0	0	0	1	0	0	0	1	0	2	27	Oceanospirillaceae
+6	2	0	2	0	0	0	0	0	3	1	2	0	0	0	0	3	1	0	0	0	0	0	0	2	0	0	0	3	0	0	1	26	Candidatus Carsonella
+6	0	0	4	0	0	1	10	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	2	0	0	0	0	0	0	0	0	25	Flavobacteriaceae
+0	0	0	0	0	0	0	19	0	0	0	0	0	3	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	24	Campylobacteraceae
+10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	1	1	0	1	0	0	0	0	1	1	0	0	20	Alteromonadaceae
+9	0	1	3	0	0	0	1	1	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	1	1	0	0	0	0	19	Flammeovirgaceae
+0	0	0	0	0	0	0	15	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	Desulfobulbaceae
+0	0	0	0	0	1	0	6	0	0	0	0	1	1	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	11	Cryomorphaceae
+2	0	0	0	0	0	2	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	9	Desulfobacteraceae
+7	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	Nannocystaceae
+1	0	0	5	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	Porphyromonadaceae
+3	0	0	0	0	0	0	2	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	Hyphomonadaceae
+1	2	0	0	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	6	Pseudoalteromonadaceae
+1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	6	Verrucomicrobiaceae
+2	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	6	Puniceicoccaceae
+4	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	6	Planctomycetaceae
+0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	4	0	0	0	0	0	0	0	0	0	0	0	6	Psychromonadaceae
+1	0	0	0	0	0	0	0	0	0	0	1	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	4	Pseudomonadaceae
+1	1	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Phyllobacteriaceae
+2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	4	Clostridiales
+2	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	4	Bacteriovoracaceae
+0	1	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	4	Ferrimonadaceae
+0	0	0	0	0	0	0	3	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Prolixibacteraceae
+0	0	0	0	0	0	0	3	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4	Cocleimonas

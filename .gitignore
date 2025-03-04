@@ -1,4 +1,4 @@
 figures/*
 functionink/*
 !functionink/functionink_internal_threshold.R
-
+data/*

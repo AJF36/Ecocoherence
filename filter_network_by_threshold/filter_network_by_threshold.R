@@ -5,7 +5,7 @@ library(this.path)
 library(dplyr)
 library(tidyr)
 
-substrates <- c("Agarose")
+substrates <- c("Agarose","Alginate","AgaroseAlginate","AgaroseCarrageenan","AgaroseChitosan","Chitin","Carrageenan")
 
 work_dir <- this.dir()
 setwd(work_dir)
@@ -22,7 +22,16 @@ for (substrate in substrates){
   substrate_net <- read_tsv(net_file)
   threshold <- thres_data$minimun_values[match(substrate,thres_data$substrates)]
   net_file_f <- filter(substrate_net,abs(Cor) >= threshold)
-  net_file_f$type <- ifelse(net_file_f$Cor > 0,0,1)
+  net_file_f$type <- ifelse(net_file_f$Cor > 0,1,2)
   write_tsv(net_file_f,paste("interactions_filtered_p0.01","threshold",substrate,".tsv", sep = "_"))
+  
+  # 1. Leer el archivo
+  datos <- read.table(paste("interactions_filtered_p0.01","threshold",substrate,".tsv", sep = "_"), header = FALSE, sep = "\t")
+  
+  # 2. Modificar la primera fila
+  datos[1, ] <- paste0("#", datos[1, ])
+  
+  # 3. Guardar el archivo modificado
+  write_tsv(datos, paste("interactions_filtered_p0.01","threshold",substrate,".tsv", sep = "_"),col_names = F)
 }
 

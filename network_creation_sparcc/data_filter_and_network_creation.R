@@ -51,7 +51,7 @@ substrates <- unique(sample_data(phylo_obj_B)$Substrate) #Hago un vector con los
 
 length <- length(substrates)
 #Now starts the for loop
-for (i in 1:2) {
+for (i in 4:length(substrates)) {
   setwd(work_dir)
   substrate <- substrates[i]
   system2("mkdir",substrate)

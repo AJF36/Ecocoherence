@@ -1,2 +1,8 @@
 substrates	minimun_values
 Agarose	0.4126
+AgaroseAlginate	0.4124
+Alginate	-0.4146
+Chitin	-0.4256
+AgaroseChitosan	0.413
+AgaroseCarrageenan	0.4084
+Carrageenan	0.4141

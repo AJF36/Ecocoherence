@@ -21,10 +21,13 @@ library(this.path)
 
 # Edit options -----------------
 # --- Select substrate that will be analysed
-substrate ="Agarose"
-stop.step= 615
-min.module=4
+# substrate ="Agarose"
+# stop.step= 266
 
+min.module=4
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
+
+for (substrate in substrates){
 # minimum size of a functionInk module to be plotted
 
 # --- Set working pathways
@@ -62,8 +65,19 @@ fileSample  <- normalizePath(fileSample, mustWork = FALSE)
 # fileFun <- file.path(work_dir,"..","functionink",substrate,"functionink_tmp","functionink_tmp",
 #                      paste("Partition-NL_Average_StopStep-",stop.step,"_interactions_filtered_0.01_threshold_",substrate,"_.tsv",sep=""))
 # fileFun <- normalizePath(fileFun)
-fileFun <- paste("Partition-NL_Average_StopStep-",stop.step,"_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep="")
-fileFun2 <- "Partition-NL_Average_StopStep-608_interactions_filtered_p0.01_threshold_Agarose_.tsv"
+
+subs_path <- file.path(work_dir,"..","functionink",substrate)
+subs_path <- normalizePath(subs_path)
+setwd(subs_path)
+# setwd(paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/", substrate, sep = ""))
+dir_path <- "functionink_tmp/"
+file <- list.files(
+  path = dir_path,
+  pattern = paste("Partition-NL_Average_StopStep-\\d+_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep=""),
+  full.names = F
+)
+# fileFun <- paste("Partition-NL_Average_StopStep-",stop.step,"_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep="")
+fileFun <- file
 # paste("Partition-NL_Average_StopStep-",stop.step,"_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep="") == "Partition-NL_Average_StopStep-608_interactions_filtered_p0.01_threshold_Agarose_.tsv"
 ######## STOP EDITING
 
@@ -430,3 +444,4 @@ heatmap.2.mod(JSD.mat,
               key.par = list(cex.axis=1.2,cex.lab=1.5),
              col=col_heat)
 dev.off()
+}
