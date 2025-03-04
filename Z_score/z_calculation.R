@@ -11,7 +11,7 @@ library(dendextend)
 library(this.path)
 
 work_dir <- this.dir()
-substrates <- c("Agarose")
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
 
 
 ###Load the randomized data
@@ -73,11 +73,10 @@ ggplot(heatmap_long, aes(x = substrate, y = family, fill = Z)) +
 
 matrix_data
 View(matrix_data)
+matrix_data[is.na(matrix_data)] <- 0
 row_clust <- hclust(dist(matrix_data))
 plot(row_clust)
- matrix_data[is.na(matrix_data)] <- 0
 cellnote_matrix <- ifelse(abs(matrix_data) > 2.5, "*","")
-cellnote_matrix
 
 
 

@@ -27,7 +27,8 @@ rownames(taxonomy)=taxonomy$taxa_id
 taxonomy=subset(taxonomy,select=-c(taxa_id))
 taxonomy <- taxonomy %>% select(-c("Kingdom", "Genus"))
 
-substrates <- c("Agarose")
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
+
 # substrate <- "Agarose"
 
 permute_taxonomy <- function(taxonomy) {
@@ -46,7 +47,7 @@ for (substrate in substrates){
   net_path <- normalizePath(net_path)
   setwd(net_path)
   network_df <- read_tsv(paste("interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep = ""))
-  
+  colnames(network_df) <- c("Sp1","Sp2","Cor","Type")
   ###Since we are going to study if some families goes together with a statistical significance, we only take the positive correlations
   network_df_positive <- network_df %>% filter(Cor > 0)
   
@@ -95,6 +96,7 @@ for (iteration in 1:100) {
     net_path <- normalizePath(net_path)
     setwd(net_path)
     network_df <- read_tsv(paste("interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep = ""))
+    colnames(network_df) <- c("Sp1","Sp2","Cor","Type")
     
     ###Since we are going to study if some families goes together with a statistical significance, we only take the positive correlations
     network_df_positive <- network_df %>% filter(Cor > 0)

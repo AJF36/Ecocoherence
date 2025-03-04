@@ -11,7 +11,7 @@ library(RColorBrewer)
 library(this.path)
 work_dir <- this.dir()
 # Lista de sustratos
-substrates <- c("Agarose")
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
 
 # Cargar tabla de taxonomía
 # fileTaxonomy <- "/home/ajf/Desktop/CNB/phyloseq_tutorial/marine_particles_source_data/sequence_table.ESV.fasta_RDPclassified.txt"

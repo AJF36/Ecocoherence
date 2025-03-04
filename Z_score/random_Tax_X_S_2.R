@@ -13,7 +13,7 @@ library(grid)
 library(gridExtra)
 library(this.path)
 work_dir <- this.dir()
-substrates <- c("Agarose")
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
 
 # Cargar la tabla de taxonomía
 # fileTaxonomy <- "/home/ajf/Desktop/CNB/phyloseq_tutorial/marine_particles_source_data/sequence_table.ESV.fasta_RDPclassified.txt"
@@ -50,7 +50,7 @@ for (iteration in 1:50) {
   perm_results <- list()
   # Iterar sobre cada sustrato
   for (substrate in substrates) {
-    substrate <- "Agarose"
+    # substrate <- "Agarose"
     # Cargar la tabla de FunctionInk
     subs_path <- file.path(work_dir,"..","functionink",substrate)
     subs_path <- normalizePath(subs_path)

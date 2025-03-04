@@ -11,7 +11,7 @@ library(dplyr)
 library(this.path)
 # Define substrates
 work_dir <- this.dir()
-substrates <- c("Agarose")
+substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
 
 # Main loop
 for (substrate in substrates) {

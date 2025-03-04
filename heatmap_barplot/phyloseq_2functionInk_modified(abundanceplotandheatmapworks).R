@@ -73,7 +73,7 @@ setwd(subs_path)
 dir_path <- "functionink_tmp/"
 file <- list.files(
   path = dir_path,
-  pattern = paste("Partition-NL_Average_StopStep-\\d+_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep=""),
+  pattern = paste("Partition-NL_Average_StopStep-\\d+_interactions_filtered_p0.01_threshold_",substrate,"_.tsv$",sep=""),
   full.names = F
 )
 # fileFun <- paste("Partition-NL_Average_StopStep-",stop.step,"_interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep="")
@@ -389,6 +389,12 @@ seq2 <- seq(108,156,24)
 seq3 <- c(204,204,204)
 final_times <-sort( c(seq1,seq1,seq1,seq2,seq2,seq2,seq3))
 ### Uncomment only for carrageenan since has 1 time less
+if (substrate == "Carrageenan"){
+  final_times <-final_times[-7] 
+} else {
+  final_times <- final_times
+}
+
 # final_times <-final_times[-7]
 select.plot.data@sam_data$Time = as.numeric(final_times)
 test = paste(select.plot.data@sam_data$Time,"",select.plot.data@sam_data$Replica,"")
