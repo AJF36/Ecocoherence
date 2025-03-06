@@ -7,16 +7,9 @@ library(tidyr)
 library(dplyr)
 library(gplots)
 library(this.path)
+
 work_dir <- this.dir()
-# Cargar la tabla de taxonomía
-# fileTaxonomy <- "/home/ajf/Desktop/CNB/phyloseq_tutorial/marine_particles_source_data/sequence_table.ESV.fasta_RDPclassified.txt"
-# taxa.in <- read.table(fileTaxonomy, sep = ";")
-# colnames(taxa.in) <- c("taxa_id", "none", "Kingdom", "sig_Kingdom", "Phylum", "sig_Phylum", "Class", "sig_Class",
-#                        "Order", "sig_Order", "Family", "sig_Family", "Genus", "sig_Genus")
-# taxonomy <- subset(taxa.in, select = c("taxa_id", "Kingdom", "Phylum", "Class", "Order", "Family", "Genus"))
-# rownames(taxonomy) <- taxonomy$taxa_id
-# taxonomy <- subset(taxonomy, select = -c(taxa_id))
-# taxonomy <- taxonomy %>% select(-c("Kingdom", "Genus"))
+
 fileTaxonomy <- file.path(work_dir, "..", "data", "marine_particles_source_data","sequence_table.ESV.fasta_RDPclassified.txt")
 fileTaxonomy <- normalizePath(fileTaxonomy, mustWork = FALSE)
 taxa.in=read.table(fileTaxonomy,sep=";") 
@@ -29,7 +22,7 @@ taxonomy <- taxonomy %>% select(-c("Kingdom", "Genus"))
 
 substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
 
-# substrate <- "Agarose"
+
 
 permute_taxonomy <- function(taxonomy) {
   taxonomy_permuted <- taxonomy %>%
@@ -56,27 +49,27 @@ for (substrate in substrates){
   
   network_df_positive <-  select(network_df_positive, c("Sp1","Sp2"))
   
-  links_df <- rbind(links_df,network_df_positive)
+  # links_df <- rbind(links_df,network_df_positive)
 
-}
+
 
 
 ###Filter the taxonomy by ASV
-ASV_to_filter <- unique(c(links_df$Sp1,links_df$Sp2))
+ASV_to_filter <- unique(c(network_df_positive$Sp1,network_df_positive$Sp2))
 taxonomy$ASV <- row.names(taxonomy)
 filtered_taxonomy <- filter(taxonomy, ASV %in% ASV_to_filter)
 
 ###Change ASV for farmilies
-links_df$Sp1 <- taxonomy$Family[match(links_df$Sp1,rownames(taxonomy))]
-links_df$Sp2 <- taxonomy$Family[match(links_df$Sp2,rownames(taxonomy))]
+network_df_positive$Sp1 <- taxonomy$Family[match(network_df_positive$Sp1,rownames(taxonomy))]
+network_df_positive$Sp2 <- taxonomy$Family[match(network_df_positive$Sp2,rownames(taxonomy))]
 
 ###Now lets make the matrix of the counts
-links_df$Pair <- apply(links_df, 1, function(x) paste(sort(x), collapse = "-"))
+network_df_positive$Pair <- apply(network_df_positive, 1, function(x) paste(sort(x), collapse = "-"))
 
-number_links_df <-as.data.frame(table(links_df$Pair))
+number_network_df_positive <-as.data.frame(table(network_df_positive$Pair))
 
-families <- unique(c(links_df$Sp1,links_df$Sp2))
-families
+families <- unique(c(network_df_positive$Sp1,network_df_positive$Sp2))
+
 
 ##Calculate the randomized counts
 results_list <- list()
@@ -85,30 +78,27 @@ results_list <- list()
 # filtered_taxonomy <- filter(taxonomy, Family %in% families) ###FIltering by family, better for ASV
 
 for (iteration in 1:100) {
-  
-  permutated_taxonomy <- permute_taxonomy(filtered_taxonomy)
-  
   iteration_df <-  data_frame(Sp1 = character(), Sp2 = character())
-  for (substrate in substrates){
+  # for (substrate in substrates){
+    permutated_taxonomy <- permute_taxonomy(filtered_taxonomy)
     # setwd(paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/",substrate,sep = ""))
     # network_df <- read_tsv(paste("interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep = ""))
     net_path <- file.path(work_dir,"..","filter_network_by_threshold")
     net_path <- normalizePath(net_path)
     setwd(net_path)
-    network_df <- read_tsv(paste("interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep = ""))
-    colnames(network_df) <- c("Sp1","Sp2","Cor","Type")
+    network_df_r <- read_tsv(paste("interactions_filtered_p0.01_threshold_",substrate,"_.tsv",sep = ""))
+    colnames(network_df_r) <- c("Sp1","Sp2","Cor","Type")
     
     ###Since we are going to study if some families goes together with a statistical significance, we only take the positive correlations
-    network_df_positive <- network_df %>% filter(Cor > 0)
+    network_df_positive_r <- network_df_r %>% filter(Cor > 0)
     
-    network_df_positive$Sp1 <- permutated_taxonomy$Family[match(network_df_positive$Sp1,rownames(permutated_taxonomy))]
-    network_df_positive$Sp2 <- permutated_taxonomy$Family[match(network_df_positive$Sp2,rownames(permutated_taxonomy))]
+    network_df_positive_r$Sp1 <- permutated_taxonomy$Family[match(network_df_positive_r$Sp1,rownames(permutated_taxonomy))]
+    network_df_positive_r$Sp2 <- permutated_taxonomy$Family[match(network_df_positive_r$Sp2,rownames(permutated_taxonomy))]
     
-    network_df_positive <-  select(network_df_positive, c("Sp1","Sp2"))
+    network_df_positive_r <-  select(network_df_positive_r, c("Sp1","Sp2"))
     
-    iteration_df <- rbind(iteration_df,network_df_positive)
-    
-  }
+    iteration_df <- rbind(iteration_df,network_df_positive_r)
+   
   
   iteration_df$Pair <- apply(iteration_df, 1, function(x) paste(sort(x), collapse = "-"))
   
@@ -116,10 +106,9 @@ for (iteration in 1:100) {
   
   results_list[[paste0("perm_", iteration)]] <- number_links_iteration_df
   
-  
   print(iteration)
-}
 
+}
 
 
 
@@ -127,9 +116,10 @@ for (iteration in 1:100) {
 results_df <- bind_rows(results_list, .id = "Iteration")
 
 # Extract the observed pairs and their frequencies
-pairs <- number_links_df$Var1
-observed_freqs <- number_links_df$Freq
-
+# pairs <- number_links_df$Var1
+pairs <- number_network_df_positive$Var1
+# observed_freqs <- number_links_df$Freq
+observed_freqs <- number_network_df_positive$Freq
 # Initialize a vector for pseudop-values
 pvalues <- numeric(length(pairs))
 
@@ -194,7 +184,7 @@ print(similarity_matrix)
 fig_dir <- file.path(work_dir,"..","figures")
 fig_dir <- normalizePath(fig_dir)
 setwd(fig_dir)
-pdf("Heatmap_all_modules_networtk_pair_families_signifcance.pdf",12,12)
+pdf(paste("Heatmap_all_modules_networtk_pair_families_signifcance.pdf",substrate,sep = "_"),12,12)
 heatmap.2(
   log10(similarity_matrix) + 1*10^-8, 
   trace = "none",
@@ -207,6 +197,7 @@ heatmap.2(
   # scale = "row"
 )
 dev.off()
+}
 # 
 # # Filter significant pairs (e.g., pvalue <= 0.05 for significance)
 # significant_pairs <- filter(pvalues_df, pvalue <= 0.01)
