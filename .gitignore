@@ -2,3 +2,9 @@ figures/*
 functionink/*
 !functionink/functionink_internal_threshold.R
 data/*
+metabolism/carveme_smetana/*
+!metabolism/carveme_smetana/divide_metabolic_models_by_module.R
+metabolism/%_identity_modules_repo_original.R
+!data/conda_envs
+metabolism/genome_aligment/*
+
