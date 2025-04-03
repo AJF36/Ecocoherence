@@ -7,8 +7,9 @@ library(this.path)
 
 
 work_dir <- this.dir()
-substrates <- c("Alginate","Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
-
+# substrates <- c("Alginate","Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
+substrates <- "AgaroseChitosan"
+number_modules_id <- c()
 # matched_esv <- read_tsv("/home/ajf/Desktop/CNB/ecocoherence_metabolism/genome_aligment/matched_ESV_id_0.97.tsv",col_names = F)
 matched_esv_file <- file.path(work_dir,"..","genome_aligment","matched_ESV_id_0.97.tsv")
 matched_esv_file <- normalizePath(matched_esv_file)
@@ -70,7 +71,7 @@ for (substrate in substrates) {
     # Definir directorios
     work_dir <- file.path(base_path, substrate, "metabolic_models")
     module_dir <- file.path(work_dir, guild)
-    
+  
     # Crear directorio si no existe
     dir.create(module_dir, showWarnings = FALSE, recursive = TRUE)
     
@@ -79,11 +80,29 @@ for (substrate in substrates) {
     
     # Iterar sobre cada ID en el módulo
     for (id in module_df$ID) {
+      file.path(this.dir(),substrate,"metabolic_models")
       # Buscar archivos que comiencen con la ID
-      files_to_copy <- list.files(path = file.path(this.dir(),substrate), pattern = paste0("^", id, ".*"), full.names = TRUE)
+      list.files(path = file.path(this.dir(),substrate,"metabolic_models"), pattern = paste0("^", id, ".xml"), full.names = TRUE)
+      files_to_copy <- list.files(path = file.path(this.dir(),substrate,"metabolic_models"), pattern = paste0("^", id, "_model.xml"), full.names = TRUE)
       # Copiar archivos al directorio del módulo
       file.copy(files_to_copy, module_dir, overwrite = TRUE)
     }
-  }
   
+    }
+  
+  for (guild in list_modules){
+    work_dir <- file.path(base_path, substrate, "metabolic_models")
+    module_dir <- file.path(work_dir, guild)
+    module_dir
+    length(list.files(module_dir,pattern = "*.xml"))
+     x <- length(list.files(module_dir,pattern = "*.xml"))
+     number_modules_id <- c(x,number_modules_id)
+  }
 }  
+
+hist(number_modules_id)
+View(table(number_modules_id))
+number_modules_id_f <- number_modules_id[number_modules_id > 30]
+table(number_modules_id_f)
+
+hist(number_modules_id_f)

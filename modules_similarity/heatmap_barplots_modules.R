@@ -197,22 +197,104 @@ dist_matrix <- dist(t(as.matrix(all_modules_df[,-1])))
 # 
 # # Heatmap visualization
 
+#####################Creation of the dendogram figure
 
+###Adding the ecological strategy df
+eco_strategy_df <- data.frame("Module" = character(), "Strategy" = character())
+for (substrate in substrates){
+  setwd(this.dir())
+  subs_df <- read_tsv(paste("modules_classified_internal",substrate,".tsv",sep  = ""))
+  #format the module column as in the df 
+  subs_df$Module <- gsub("mod_","",subs_df$Module)
+  subs_df$Module <- paste(subs_df$Module,"_",substrate,sep="")
+  #bind the dataframes
+  eco_strategy_df <- rbind(eco_strategy_df,subs_df)
+}
 # Clustered dendrogram
-par(mar = c(10, 5, 5, 5))  # Adjust margins
+# par(mar = c(10, 5, 5, 5))  # Adjust margins
 # par(cex = 0.9)            # Adjust label size
 clustered_matrix <- hclust(dist_matrix, method = "average")
 # plot(clustered_matrix, main = "Clustered Dendrogram")
-
-
 dendogram <- as.dendrogram(clustered_matrix)
-dendogram  %>% set("labels_cex" , 0.9) %>% set("labels_col",k=12) %>% plot
-dendogram %>% rect.dendrogram(k=12, border = 8,lty = 5, lwd = 2 )
-plot(dendogram)
+dend_labels_df <- data.frame("labels" = labels(dendogram), strategy = eco_strategy_df$Strategy[match(labels(dendogram),eco_strategy_df$Module)])
+dend_labels_df[is.na(dend_labels_df)] <- "not_defined"
+# dend_labels_df <- drop_na(dend_labels_df)
+
+# strategy_colors
+##Set the palette
+unique_strategies <- unique(dend_labels_df$strategy)
+unique_strategies
+# strategy_color_palette <- setNames(
+#   rainbow(length(unique_strategies)), 
+#   unique_strategies
+# )
+strategy_color_palette <- c(
+  facilitation = "red",
+  selection = "blue",
+  transition = "yellow",
+  generalist = "green",
+  not_defined = "gray"
+)
+dend_labels_df$strategy
+colors_to_use <- strategy_color_palette[dend_labels_df$strategy]
+# colors_to_use[is.na(colors_to_use)] <- "grey"
+colors_to_use
+
+length(colors_to_use) == length(labels(dendogram))
+
+fig_dir <- file.path(work_dir,"..","figures")
+fig_dir <- normalizePath(fig_dir)
+setwd(fig_dir)
+
+par(mar = c(12, 0, 5, 5) ,oma = c(9, 0, 2, 2))  # Increased bottom margin for color bar
+# Create a PDF with appropriate dimensions
+pdf("large_dendogram.pdf", width = 40, height = 35, pointsize = 9)
+par(mar = c(33, 0, 5, 5) ,oma = c(33, 0, 2, 2))  # Increased bottom margin for color bar
+# Plot the dendrogram
+dendogram  %>% set("labels_cex" , 1) %>% set("labels_col",k=9) %>%
+  set("branches_lwd",5) %>%
+  set("labels_cex",3.5) %>% 
+  set("branches_k_color",k=9) %>%
+  plot
+dendogram %>% rect.dendrogram(k=9, border = 1,lty = 4, lwd = 4 ,lower_rect = 0)
+# plot(dendogram, 
+#      main = "Modules Clustering by Ecological Strategy" ,
+#      cex= 6
+#      # Remove y-axis to give more space
+# )
+# Add the colored bars
+colored_bars(
+  colors = colors_to_use,
+  dend = dendogram,
+  sort_by_labels_order = F,
+  rowLabels = "",  # Try a smaller shift value
+  text_cex = 20,# Larger text size for visibility
+  y_scale = 0.02,
+  bars_width = 0.1,
+  y_shift = -0.13)
+legend("topright", 
+       legend = unique(dend_labels_df$strategy),  # Ensure this matches dendrogram labels
+       fill = strategy_color_palette[unique(dend_labels_df$strategy)],  
+       cex = 6, 
+       title = "Strategies")
+
+
+dev.off()
+
+##########################
+
+  
+##########################
+
+
+
+
+# dendogram  %>% set("labels_cex" , 0.9) %>% set("labels_col",k=12) %>% plot
+# dendogram %>% rect.dendrogram(k=12, border = 8,lty = 5, lwd = 2 )
 
 ###Get the module names from the cluster
 # Cut the dendrogram into `k` clusters
-k <- 12 # Number of clusters
+k <- 10 # Number of clusters
 clusters <- cutree(clustered_matrix, k = k)
 
 # Create a list of labels for each cluster

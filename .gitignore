@@ -7,4 +7,7 @@ metabolism/carveme_smetana/*
 metabolism/%_identity_modules_repo_original.R
 !data/conda_envs
 metabolism/genome_aligment/*
-
+modules_table/
+!modules_table/*.R$
+modules_similarity/
+!modules_similarity/*R

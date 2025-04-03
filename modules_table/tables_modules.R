@@ -7,6 +7,8 @@ library(phyloseq)
 library(dplyr)
 library(grid)
 library(gridExtra)
+library(gt)
+library(webshot)
 library(this.path)
 
 work_dir <- this.dir()
@@ -154,6 +156,34 @@ for (substrate in substrates) {
 }
 
 
+familys_of_interest <- c("Helicobacteraceae","Nannocystaceae","Campylobacteraceae","Porphyromonadaceae","Colwelliaceae","Alteromonadaceae","Rhodobacteraceae"
+                         ,"Flavobacteriaceae","Oceanospirillaceae","Syntrophaceae","Anaerolineaceae","Desulfobacteraceae","Psychromonadaceae")
+gt_table_df <- subset(sums_df_ordered[colnames(numeric_columns)])
+row_sums <- rowSums(gt_table_df)
+gt_table_df <- sweep(gt_table_df,1,row_sums,"/")
+gt_table_df <- sweep(gt_table_df,1,100,"*")
+gt_table_df <- round(gt_table_df,2)
+
+gt_table_df$Family <- rownames(gt_table_df)
+gt_table_df <- filter(gt_table_df,Family %in% familys_of_interest)
+gt_table_df_f <- gt_table_df[,!colSums(gt_table_df[,-length(colnames(gt_table_df))]) == 0]
+
+
+gt_table <- gt(gt_table_df_f)
+gt_table <- 
+  gt_table %>%
+  tab_spanner(label = "Modules",
+              columns = colnames(numeric_columns)[colnames(numeric_columns) %in% colnames(gt_table_df_f)]
+              ) %>% tab_header(
+                title = md("**Percentage of members of each family in the different modules**"),
+                subtitle = substrate
+              ) %>% data_color(columns = colnames(gt_table_df_f)[-length(colnames(gt_table_df_f))],
+                               fn = function(x) ifelse(x >= 70 , "blue","white"))
+  
+
+
+setwd(this.dir())
+gtsave(gt_table,path = this.dir(),filename = paste(substrate,"modules_table.html",sep = "_"))
 
 # Agregar un título
 
