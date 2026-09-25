@@ -12,7 +12,7 @@ library(this.path)
 script_dir <- this.dir()
 figures_dir <- normalizePath(file.path(script_dir, "..", "figures", "7d_plot_chord_diagrams_family_module"), mustWork = FALSE)
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
-producer_dir <- normalizePath(file.path(script_dir, "..", "results", "6h_classify_modules_by_ecological_strategy"), mustWork = FALSE)
+producer_dir <- normalizePath(file.path(script_dir, "..", "results", "6i_classify_modules_by_ecological_strategy_combined"), mustWork = FALSE)
 
 # fileTaxonomy <- "/home/ajf/Desktop/CNB/phyloseq_tutorial/marine_particles_source_data/sequence_table.ESV.fasta_RDPclassified.txt"
 fileTaxonomy <- file.path(script_dir,"..","data","marine_particles_source_data/sequence_table.ESV.fasta_RDPclassified.txt")

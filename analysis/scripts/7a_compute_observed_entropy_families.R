@@ -19,7 +19,7 @@ substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", 
 for (substrate in substrates) {
   # Set working directory
   # path <- paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/", substrate, sep = "")
-  path <- file.path(script_dir, "..","results","6a_build_family_module_table")
+  path <- file.path(script_dir, "..","results","6b_build_family_module_table_with_percentages")
   path <- normalizePath(path)
   setwd(path)
   

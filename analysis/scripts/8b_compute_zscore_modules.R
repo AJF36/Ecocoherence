@@ -10,7 +10,7 @@ dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 observed_dir <- normalizePath(file.path(script_dir, "..", "results", "7b_compute_observed_entropy_modules"), mustWork = FALSE)
 randomized_dir <- normalizePath(file.path(script_dir, "..", "results", "6f_compute_randomized_null_entropy_modules"), mustWork = FALSE)
-strategy_dir <- normalizePath(file.path(script_dir, "..", "results", "6h_classify_modules_by_ecological_strategy"), mustWork = FALSE)
+strategy_dir <- normalizePath(file.path(script_dir, "..", "results", "6i_classify_modules_by_ecological_strategy_combined"), mustWork = FALSE)
 
 observed_df <- read_tsv(file.path(observed_dir, "entropy_by_modules.tsv"),col_names = T)
 random_df <- read_tsv(file.path(randomized_dir, "randomized_entropy_by_modules.tsv"),col_names = T)

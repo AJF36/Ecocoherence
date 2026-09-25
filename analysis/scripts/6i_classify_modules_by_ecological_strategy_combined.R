@@ -463,7 +463,9 @@ for (substrate in substrates){
 
 
   setwd(results_dir)
-  # write_tsv(modules_classified_df, paste("modules_classified_internal",substrate,".tsv",sep = ""))
+  # Per-substrate table (Module, Strategy), read by 7d, 8b and 8c (formerly written by 6h)
+  write_tsv(dplyr::rename(dplyr::select(modules_classified_df, module, strategy), Module = module, Strategy = strategy),
+            paste("modules_classified_internal",substrate,".tsv",sep = ""))
 
 }
 setwd(results_dir)

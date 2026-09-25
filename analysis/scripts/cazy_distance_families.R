@@ -11,8 +11,8 @@
 
 rm(list=ls())
 
-results_dir = "results/cazy_distance_families.R"
-figures_dir = "figures/cazy_distance_families.R"
+results_dir = "analysis/results/cazy_distance_families.R"
+figures_dir = "analysis/figures/cazy_distance_families.R"
 
 for (dir in c(results_dir,figures_dir)) {
 if(!(fs::dir_exists(dir))) {
@@ -30,7 +30,7 @@ substrates = c("Alginate","Agarose","AgaroseAlginate","Chitin","Carrageenan","Ag
 # substrate = substrates[1]
 
 # Load the tax table
-fileTaxonomy <- file.path("data", "marine_particles_source_data","sequence_table.ESV.fasta_RDPclassified.txt")
+fileTaxonomy <- file.path("analysis", "data", "marine_particles_source_data","sequence_table.ESV.fasta_RDPclassified.txt")
 fileTaxonomy <- normalizePath(fileTaxonomy, mustWork = FALSE)
 taxa.in=read.table(fileTaxonomy,sep=";") 
 colnames(taxa.in)=c("taxa_id","none","Kingdom","sig_Kingdom","Phylum","sig_Phylum","Class","sig_Class",

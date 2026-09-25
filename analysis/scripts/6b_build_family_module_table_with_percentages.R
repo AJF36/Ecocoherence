@@ -183,7 +183,7 @@ for (substrate in substrates) {
 sums_df_ordered_filtered$Family <- rownames(sums_df_ordered_filtered)
 sums_df_ordered_filtered$n_members_big_modules <- n_members_in_big_modules ### Number of members in big_modules
 sums_df_ordered_filtered <- sums_df_ordered_filtered %>%
-  mutate("percentage_members_in_big_modules" = round((n_members_in_big_modules/n_members)* 100),2) %>%
+  mutate("percentage_members_in_big_modules" = round((n_members_in_big_modules/n_members)* 100, 2)) %>%
   relocate(n_members, .before = colnames(sums_df_ordered_filtered)[1]) %>%
   relocate(percentage_members_in_big_modules, .after = n_members) %>%
   relocate(Family, .before = n_members ) %>%
@@ -201,7 +201,7 @@ big_modules_df_final <- filter(big_modules_df_final, n_members >= 4)
   list_ratios_families[[substrate]] <- ratio_families_substrate * 100
   # View(sums_df_ordered)
   setwd(results_dir)
-  write_tsv(big_modules_df_final,paste("group_analysis_",substrate,"_TEST",".tsv", sep = ""))
+  write_tsv(big_modules_df_final,paste("group_analysis_",substrate,".tsv", sep = ""))
 }
 
 ### Code for making the table figure

@@ -25,7 +25,7 @@ library(zCompositions)##Package to replace the NA
 script_dir <- this.dir()
 figures_dir <- normalizePath(file.path(script_dir, "..", "figures", "8c_plot_heatmaps_families_modules"), mustWork = FALSE)
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
-strategy_dir <- normalizePath(file.path(script_dir, "..", "results", "6h_classify_modules_by_ecological_strategy"), mustWork = FALSE)
+strategy_dir <- normalizePath(file.path(script_dir, "..", "results", "6i_classify_modules_by_ecological_strategy_combined"), mustWork = FALSE)
 relative_abundance_dir <- normalizePath(file.path(script_dir, "..", "results", "7c_aggregate_module_relative_abundance"), mustWork = FALSE)
 # Define substrates
 substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", "AgaroseChitosan", "Chitin", "Carrageenan")
@@ -34,7 +34,7 @@ substrates <- c("Alginate", "Agarose", "AgaroseAlginate", "AgaroseCarrageenan", 
 
 families <- c()
 for (substrate in substrates) {
-  path_file <- file.path(script_dir,"..","results","6a_build_family_module_table")
+  path_file <- file.path(script_dir,"..","results","6b_build_family_module_table_with_percentages")
   path_file <- normalizePath(path_file)
   # families_table <- read_tsv(paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/", substrate, "/group_analysis_", substrate, ".tsv", sep = ""))
   families_table <- read_tsv(file.path(path_file,paste("group_analysis_", substrate, ".tsv", sep = "")))
@@ -59,7 +59,7 @@ all_modules_df <- data.frame(Family = families)
 for (substrate in substrates) {
   ## Load the table
   # group_analysis_table <- read_tsv(paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/", substrate, "/group_analysis_", substrate, ".tsv", sep = ""))
-  path_file <- file.path(script_dir,"..","results","6a_build_family_module_table")
+  path_file <- file.path(script_dir,"..","results","6b_build_family_module_table_with_percentages")
   path_file <- normalizePath(path_file)
   # families_table <- read_tsv(paste("/home/ajf/Desktop/CNB/ecocoherence_sparcc/", substrate, "/group_analysis_", substrate, ".tsv", sep = ""))
   group_analysis_table <- read_tsv(file.path(path_file,paste("group_analysis_", substrate, ".tsv", sep = "")))

@@ -432,7 +432,7 @@ print(p)
 dev.off()
 
 #--- Compare all against all profiles
-source(file.path(script_dir, "lib", "heatmap_2_mod.R"))
+source(file.path(script_dir, "..", "..", "R", "heatmap_2_mod.R"))
 plotTitle=paste("heatmap_modulesVsecologicalPrefs4","_",substrate,".pdf",sep="")
 pdf(file=plotTitle,width = 12,height = 12)
 heatmap.2.mod(JSD.mat,

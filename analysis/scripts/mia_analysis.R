@@ -92,7 +92,7 @@ colData(mia_main_final) = colData(mia_main_final)[setdiff(colnames(colData(mia_m
 colData(mia_main_final)[["Time"]] = as.numeric(colData(mia_main_final)[["Time"]])
 # Now since every substrate has its own network/functionink clustering, split by substrate
 
-saveRDS(mia_main_final,file ="results/mia_analysis/mia_main_final.RDS")
+saveRDS(mia_main_final,file ="analysis/results/mia_analysis/mia_main_final.RDS")
 
 mia_substrate_list = mia::splitOn(mia_main_final,"Substrate")
 
@@ -133,7 +133,7 @@ imap(mia_substrate_list,function(mia,substrate) {
   
   plot = modified_plotabundance(mia,variable_to_aggregate = "module", order.col.by = "Time") +
     ggtitle(label = glue::glue("Module barplot: {substrate}"))
-  ggsave(filename = glue::glue("figures/mia_analysis/barplot_modules_{substrate}.pdf"))
+  ggsave(filename = glue::glue("analysis/figures/mia_analysis/barplot_modules_{substrate}.pdf"))
 }
 )
 
@@ -166,7 +166,7 @@ purrr::iwalk(selected_modules_misosoup,function(modules,substrate) {
     filter(ID != "*") |> 
     select("ASV","ID")
 
-  write_tsv(final_table,file = glue::glue("results/mia_analysis/metabolic_models_{substrate}.tsv"))
+  write_tsv(final_table,file = glue::glue("analysis/results/mia_analysis/metabolic_models_{substrate}.tsv"))
 
 })
 
@@ -176,8 +176,8 @@ substrates = c("Agarose","Alginate","Chitin")
 walk(substrates, function(substrate) {
 
 models_folder = glue::glue("metabolism/carveme_smetana/{substrate}/metabolic_models/")
-community_file = glue::glue("results/mia_analysis/metabolic_models_{substrate}.tsv")
-target_folder = glue::glue("results/mia_analysis/misosoup_analysis_{substrate}")
+community_file = glue::glue("analysis/results/mia_analysis/metabolic_models_{substrate}.tsv")
+target_folder = glue::glue("analysis/results/mia_analysis/misosoup_analysis_{substrate}")
 
 system2(command = "../general_scripts/move_metabolic_models.sh" , args = c(
   models_folder,
@@ -197,7 +197,7 @@ misosoup_media_dict = list("Agarose" = "gal", "Alginate" = "alg" , "Chitin" = "c
 
 walk(substrates , function(substrate) {
 
-  models_folder = normalizePath(glue::glue("results/mia_analysis/misosoup_analysis_{substrate}"))
+  models_folder = normalizePath(glue::glue("analysis/results/mia_analysis/misosoup_analysis_{substrate}"))
 
   misosoup_media_select = misosoup_media_dict[[substrate]]
   # move_metabolic_models.sh copies models in as "<ID>.xml" (e.g.

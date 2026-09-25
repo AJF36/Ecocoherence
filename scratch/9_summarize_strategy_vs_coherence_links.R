@@ -95,7 +95,7 @@ for (sub in substrates){
   test$ms <- as.character(test$ms)
   test$fs <- as.character(test$fs)
   ### Load the table with the information of which families goes to which modules
-  table_path  <- file.path(links_table_dir,paste("group_analysis_",sub,"_TEST.tsv", sep = ""))
+  table_path  <- file.path(links_table_dir,paste("group_analysis_",sub,".tsv", sep = ""))
   links_table <- read_tsv(normalizePath(table_path))
   links_table_f <- select(links_table, !matches("members|Family"))
   rownames(links_table_f) <- links_table$Family
