@@ -27,4 +27,7 @@ modules_similarity/*
 *.err
 *.out
 *.log
+*.gz
 .Rhistory
+metabolism/dbcan_all/*
+metabolism/dbcan_test/*

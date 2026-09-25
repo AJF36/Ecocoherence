@@ -147,13 +147,14 @@ for (i in 4:length(substrates)) {
     }
   
   write.table(df, paste("interactions_filtered_0.01.",substrate,".tsv", sep = "_"), quote = FALSE, row.names = FALSE, sep = "\t")
-  
-  
+
+
+}
 }
   #---------------------------------------------------------------------------------
-  
-  
-  
+
+
+
   ###All the code below its before the implementation of the dual model
   
   
